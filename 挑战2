@@ -1,0 +1,43 @@
+Chindogu + travel
+/*
+ Controlling a servo position using a potentiometer (variable resistor)
+ by Michal Rinott <http://people.interaction-ivrea.it/m.rinott>
+
+ modified on 8 Nov 2013
+ by Scott Fitzgerald
+ http://www.arduino.cc/en/Tutorial/Knob
+*/
+
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+int LED = 2;
+
+int analogpin = A0;
+
+void setup()
+{
+  myservo.attach(9);
+  pinMode(LED, OUTPUT);
+  Serial.begin(9600);
+  
+}
+ void loop( )
+ {
+  int val= analogRead(analogpin);
+  if (val> 500)
+  {
+    digitalWrite(LED,LOW );
+  }
+  else
+  {
+    digitalWrite(LED,HIGH);
+   
+  }
+  int num = map (val,0,1023,0,180);
+  Serial.println(num);
+ myservo.write(num);
+ delay(15);
+ }
